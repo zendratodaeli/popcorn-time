@@ -1,7 +1,7 @@
 function Footer() {
   return(
     <div>
-      <footer>Hello, this is a Footer</footer>
+      <footer>Copyright@ZEndDaE</footer>
     </div>
   )
 }
