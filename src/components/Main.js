@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import "./Main.css";
 import movies from "../data/movies.json"
+import Movie from './Movie';
 
 function Main() {
 
@@ -19,34 +20,36 @@ function Main() {
     message = <h1>"Total Movies : {moviesToDisplay.length}</h1>
   }
 
+  function ascendingMovies() {
+    const ascending = [...moviesToDisplay].sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    }
+    )
+    setMoviesToDisplay(ascending);
+  }
+
+  function descendingMovies() {
+    const ascending = [...moviesToDisplay].sort((a, b) => {
+      return b.title.localeCompare(a.title);
+    }
+    )
+    setMoviesToDisplay(ascending);
+  }
+
   return(
     <div className="Main">
       <h1> {message} </h1>
+
+      <button onClick={ascendingMovies}>Ascending</button>
+      <button onClick={descendingMovies}>Descending</button>
       
       {moviesToDisplay.map(element => {
-        console.log(element.length)
         return (
           <div key={element.id} className="card">
-            <p>{element.title}</p>
-            <p>{element.rating}</p>
-
-            {element.rating > 8 && <p>Recommended</p>}
-            
-            <p>{element.year}</p>
-
-            {element.year > 2000 ? <p>New Movie</p> : <p>Old Movie</p>}
-
-            <p>{element.genres[0]} {element.genres[1]}</p>
-            {/* <div><img src={element.imgURL} alt='img'></img></div> */}
-            {element.imgURL 
-              ? <div><img src={element.imgURL} alt='img'></img></div> 
-              : <div>Sorry, no image my friend. We are working on it!</div> 
-            }
-            
-            <button onClick={ () => {deleteMovie(element.id)} }>Delete</button>
+            <Movie movies={element} key={element.id} delete={deleteMovie}/>
+            {/* <button onClick={ () => {deleteMovie(element.id)} }>Delete</button> */}
           </div>
-        );
-
+          );
         })
       }
     </div>
