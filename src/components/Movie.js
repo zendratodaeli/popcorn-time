@@ -1,5 +1,4 @@
 function Movie(props) {
-  console.log(props);
 
   return (
     <div>
@@ -12,7 +11,7 @@ function Movie(props) {
           ? <div><img src={props.movies.imgURL} alt="img"/></div> 
           : <div>Sorry, no image my friend. We are working on it!</div> 
         }
-        <button onClick={() => {props.delete(props.movies.id)}}>Delete</button>
+        <button onClick={() => {props.delete(props.movies.title)}}>Delete</button>
       </div>
     </div>
   )
